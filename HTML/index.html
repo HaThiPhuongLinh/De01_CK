@@ -10,41 +10,65 @@
     <script src="JS/bootstrap.min.js"></script>
     <title>De01</title>
     <style>
-        .title{
-            margin-left: -690px;
-            margin-top: 270px;
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title {
+            margin-left: 300px;
+            margin-top: -70px;
             color: blue;
             font-size: 40px;
         }
 
-        [class8="col-"] {
-            padding: 0px;
+        .row {
+            margin: 0px;
         }
-        
+
         li {
             width: 80px;
-            margin-left: 80px;
+            margin-left: 40px;
             list-style-type: none;
         }
 
-        hr{
-            margin-top: 0px;
+        .p1 {
+            margin-top: 10px;
+            border-top: 3px solid black;
+            width: 1180px;
         }
     </style>
 </head>
+
 <body>
-    <div style="display: flex;">
-        <img src="IMAGES/picture.png" alt="" height="350px" width = "1535px">  
+    <div id="container">
+        <div>
+            <img src="IMAGES/picture.png" alt="" height="350px" width="1180px">
+        </div>
         <div class="title">Tư Vấn Online</div>
+        <hr class="p1">
+        <div class="row" style="width: 1150px;">
+            <ul class="navbar-nav col-md-12 navbar-expand-md alert-secondary">
+                <li class="nav-item justify-content-md-around"><a href="#" class="nav-link">Trang chủ</a></li>
+                <li class="nav-item justify-content-md-around" style="margin-left: 20px;"><a href="#" id="datlich-link"
+                        class="nav-link">Đặt lịch</a></li>
+            </ul>
+        </div>
+        <hr class="p1">
+        <div class="row">
+            <ul class="navbar-nav col-md-12 " style="font-weight: bold;">
+                <li style="margin-left: 20px;">STT</li>
+                <li style="margin-left: 20px; width: 100px;">Mã bệnh nhân</li>
+                <li style="margin-left: 140px;">Mật khẩu</li>
+                <li style="margin-left: 120px;">Ngày khám</li>
+                <li style="margin-left: 120px; width: 130px;">Phụ thu dịch vụ</li>
+                <li style="margin-left: 120px; width: 130px;">Chuyên khoa</li>
+            </ul>
+        </div>
+
     </div>
-    <hr style="border-top: 2px solid;">
-    <div class="row">
-        <ul class="navbar-nav col-md-5 navbar-expand-md alert-secondary">
-            <li class="nav-item justify-content-md-around"><a href="#" class="nav-link">Trang chủ</a></li>
-            <li class="nav-item justify-content-md-around"><a href="#" class="nav-link">Đặt lịch</a></li>
-        </ul>
-    </div>
-    <hr style="border-top: 2px solid; margin-top: 20px;">
+
 </body>
 
 </html>
