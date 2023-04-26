@@ -38,6 +38,15 @@
             border-top: 3px solid black;
             width: 1180px;
         }
+        .p2 {
+            margin-top: 10px;
+            border-top: 1px solid gainsboro;
+            width: 1130px;
+        }
+
+        .student{
+            font-size: 30px;
+        }
     </style>
 </head>
 
@@ -58,15 +67,27 @@
         <hr class="p1">
         <div class="row">
             <ul class="navbar-nav col-md-12 " style="font-weight: bold;">
-                <li style="margin-left: 20px;">STT</li>
-                <li style="margin-left: 20px; width: 100px;">Mã bệnh nhân</li>
-                <li style="margin-left: 140px;">Mật khẩu</li>
-                <li style="margin-left: 120px;">Ngày khám</li>
-                <li style="margin-left: 120px; width: 130px;">Phụ thu dịch vụ</li>
-                <li style="margin-left: 120px; width: 130px;">Chuyên khoa</li>
+                <li style="margin-left: 20px;" id="li1">STT</li>
+                <li style="margin-left: 20px; width: 100px;" id="li2">Mã bệnh nhân</li>
+                <li style="margin-left: 140px;" id="li3">Mật khẩu</li>
+                <li style="margin-left: 120px;" id="li4">Ngày khám</li>
+                <li style="margin-left: 120px; width: 130px;" id="li5">Phụ thu dịch vụ</li>
+                <li style="margin-left: 120px; width: 130px;" id="li6">Chuyên khoa</li>
             </ul>
         </div>
-
+        <hr class="p2">
+        <div class="row">
+            <ul class="navbar-nav col-md-12 ">
+                <li style="margin-left: 20px;" id="li7"></li>
+                <li style="margin-left: 20px; width: 100px;" id="li8"></li>
+                <li style="margin-left: 140px;" id="li9"></li>
+                <li style="margin-left: 120px;" id="li10"></li>
+                <li style="margin-left: 120px; width: 130px;" id="li11"></li>
+                <li style="margin-left: 120px; width: 130px;" id="li12"></li>
+            </ul>
+        </div>
+        <hr class="p1" style="margin-top: 50px;">
+        <div class="student">21126671-Hà Thị Phương Linh-DHKTMP17CTT</div>
     </div>
     <div class="container2">
         <div class="modal fade" id="myModal" role="dialog">
@@ -81,29 +102,40 @@
                         <div class="form-group">
                             <label for="usr">Mã bệnh nhân:</label>
                             <input type="text" class="form-control" placeholder="Ma benh nhan" id="usr">
-                            <div style="color: red; font-style: italic;">(*)BN-YYYYYY</div>
+                            <div style="color: red; font-style: italic;">
+                                <div>(*)BN-YYYYYY </div>
+                                <div id="mess1"></div>
+                            </div>
+
                         </div>
                         <div class="form-group">
                             <label for="pwd">Mật khẩu</label>
                             <input type="password" class="form-control" placeholder="Mat khau" id="pwd">
-                            <div style="color: red; font-style: italic;">(*)</div>
+                            <div style="color: red; font-style: italic;">
+                                <div>(*) </div>
+                                <div id="mess2"></div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="date">Ngày khám</label>
-                            <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="date">
-                            <div style="color: red; font-style: italic;">(*)</div>
+                            <input type="date" class="form-control" placeholder="dd/mm/yyyy" id="date">
+                            <div style="color: red; font-style: italic;">
+                                <div>(*) </div>
+                                <div id="mess3"></div>
+                            </div>
                         </div>
                         <label for="pwd">Loại dịch vụ</label>
                         <div class="form-group">
                             <label class="checkbox-inline">
-                                <input type="checkbox" checked value="">Khám bệnh theo yêu cầu
+                                <input type="checkbox" checked value="" id="service1">Khám bệnh theo yêu cầu
                             </label>
                             <label class="checkbox-inline">
-                                <input type="checkbox" checked value="">Điều trị ngoại trú
+                                <input type="checkbox" checked value="" id="service2">Điều trị ngoại trú
                             </label>
                             <label class="checkbox-inline">
-                                <input type="checkbox" value="">Bác sĩ theo yêu cầu
+                                <input type="checkbox" value="" id="service3">Bác sĩ theo yêu cầu
                             </label>
+                            <div style="color: red; font-style: italic;" id="mess4"></div>
                         </div>
                         <div>
                         </div>
@@ -115,7 +147,7 @@
                                 <option>Nội tổng quát</option>
                             </select>
                         </div>
-                        <button type="button" class="btn btn-info">Đặt lịch</button>
+                        <button type="button" class="btn btn-info" id="book-button">Đặt lịch</button>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                         </div>
@@ -132,6 +164,101 @@
                     $("#myModal").modal("show");
                 });
             });
+
+            const bookButton = document.querySelector('#book-button');
+            bookButton.addEventListener('click', bookAppointment);
+
+            function bookAppointment() {
+                var listItem = document.querySelectorAll('#myList li:not(:first-child)');
+                var stt = 1;
+
+                const user = document.querySelector('#usr').value;
+                const pass = document.querySelector('#pwd').value;
+                const dateValue = document.querySelector('#date').value;
+
+                const chuyenkhoa = document.getElementById("sel1").value;
+                const message1 = document.getElementById("mess1");
+                const message2 = document.getElementById("mess2");
+                const message3 = document.getElementById("mess3");
+                const message4 = document.getElementById("mess4");
+
+                listItem.forEach(function (li) {
+                    li.innerText = stt + '. ' + li.innerText;
+                    stt++;
+                });
+
+                const maBenhNhan = /^BN-\d{6}$/;
+                if (user === "") {
+                    message1.textContent = "Mã bệnh nhân không được để trống";
+                }
+                else if (!(maBenhNhan).test(user)) {
+                    message1.textContent = "Mã bệnh nhân phải có định dạng BN-YYYYYY";
+                } else {
+                    message1.textContent = "";
+                }
+
+                const matKhau = /^.{6,}$/;
+                if (pass === "") {
+                    message2.textContent = "Mật khẩu không được để trống";
+                }
+                else if (!(matKhau).test(pass)) {
+                    message2.textContent = "Mật khẩu phải trên 6 kí tự";
+                }
+                else {
+                    message2.textContent = "";
+                }
+
+                const ngayHienTai = new Date();
+                const ngayKham = new Date(dateValue);
+                if (ngayKham <= ngayHienTai) {
+                    message3.textContent = "Vui lòng chọn ngày khám sau ngày hôm nay";
+                }
+                else if (dateValue === "") {
+                    message3.textContent = "Ngày khám không được để trống";
+                } else {
+                    message3.textContent = "";
+                }
+
+                let fee = 0; 
+                let service1 = document.getElementById("service1");
+                let service2 = document.getElementById("service2");
+                let service3 = document.getElementById("service3");
+
+                if (!service1.checked && !service2.checked && !service3.checked) {
+                    message4.textContent = "Vui lòng chọn ít nhất một dịch vụ";
+                }
+                else {
+                    message4.textContent = "";
+                    if (service1.checked) {
+                        fee += 500000;
+                    }
+                    if (service2.checked) {
+                        fee += 500000;
+                    }
+                    if (service3.checked) {
+                        fee += 500000;
+                    }
+                }
+
+                if (message1.textContent || message2.textContent || message3.textContent || message4.textContent) {
+                    return false;
+                }
+
+                document.getElementById("li7").innerHTML = stt;
+                document.getElementById("li8").innerHTML = user;
+                document.getElementById("li9").innerHTML = pass;
+                document.getElementById("li10").innerHTML = ngayKham.toLocaleDateString("en-GB", {day: 'numeric', month: 'numeric', year: 'numeric'});
+                document.getElementById("li11").innerHTML = fee;
+                document.getElementById("li12").innerHTML = chuyenkhoa;
+
+               
+                document.getElementById("myModal").addEventListener('hidden.bs.modal', function (e) {
+                    document.getElementById("myModal").style.display = "none";
+                });
+
+                $('#myModal').modal('hide');
+                return true;
+            }
         </script>
 
 </body>
